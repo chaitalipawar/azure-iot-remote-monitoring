@@ -11,7 +11,7 @@ using Microsoft.Azure.Devices.Shared;
 
 namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
 {
-    public static class SampleDeviceFactory
+    public static class SmartCoolerFactory
     {
         public const string OBJECT_TYPE_DEVICE_INFO = "DeviceInfo";
 
@@ -25,52 +25,52 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
 
         private static readonly List<string> DefaultDeviceNames = new List<string>
         {
-            "CoolingSampleDevice001",
-            "CoolingSampleDevice002",
-            "CoolingSampleDevice003",
-            "CoolingSampleDevice004",
-            "CoolingSampleDevice005",
-            "CoolingSampleDevice006",
-            "CoolingSampleDevice007",
-            "CoolingSampleDevice008",
-            "CoolingSampleDevice009",
-            "CoolingSampleDevice010",
-            "CoolingSampleDevice011",
-            "CoolingSampleDevice012",
-            "CoolingSampleDevice013",
-            "CoolingSampleDevice014",
-            "CoolingSampleDevice015",
-            "CoolingSampleDevice016",
-            "CoolingSampleDevice017",
-            "CoolingSampleDevice018",
-            "CoolingSampleDevice019",
-            "CoolingSampleDevice020",
-            "CoolingSampleDevice021",
-            "CoolingSampleDevice022",
-            "CoolingSampleDevice023",
-            "CoolingSampleDevice024",
-            "CoolingSampleDevice025"
+            "SmartCooler001",
+            "SmartCooler002",
+            "SmartCooler003",
+            "SmartCooler004",
+            "SmartCooler005",
+            "SmartCooler006",
+            "SmartCooler007",
+            "SmartCooler008",
+            "SmartCooler009",
+            "SmartCooler010",
+            "SmartCooler011",
+            "SmartCooler012",
+            "SmartCooler013",
+            "SmartCooler014",
+            "SmartCooler015",
+            "SmartCooler016",
+            "SmartCooler017",
+            "SmartCooler018",
+            "SmartCooler019",
+            "SmartCooler020",
+            "SmartCooler021",
+            "SmartCooler022",
+            "SmartCooler023",
+            "SmartCooler024",
+            "SmartCooler025"
         };
 
         private static readonly List<string> FreeFirmwareDeviceNames = new List<string>
         {
-            "CoolingSampleDevice001",
-            "CoolingSampleDevice002",
-            "CoolingSampleDevice003",
-            "CoolingSampleDevice004",
-            "CoolingSampleDevice005",
-            "CoolingSampleDevice006",
-            "CoolingSampleDevice007",
-            "CoolingSampleDevice008"
+            "SmartCooler001",
+            "SmartCooler002",
+            "SmartCooler003",
+            "SmartCooler004",
+            "SmartCooler005",
+            "SmartCooler006",
+            "SmartCooler007",
+            "SmartCooler008"
         };
 
         private static readonly List<string> HighTemperatureDeviceNames = new List<string>
         {
-            "CoolingSampleDevice001",
-            "CoolingSampleDevice002",
-            "CoolingSampleDevice003",
-            "CoolingSampleDevice004",
-            "CoolingSampleDevice005"
+            "SmartCooler001",
+            "SmartCooler002",
+            "SmartCooler003",
+            "SmartCooler004",
+            "SmartCooler005"
         };
 
         private class Location
@@ -87,7 +87,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
         }
 
         private static List<Location> _possibleDeviceLocations = new List<Location>{
-            new Location(47.659159, -122.141515),  // Microsoft Red West Campus, Building A
+            new Location(47.659159, -122.141515),  // Microsoft Red West Campus, Representative A
             new Location(47.593307, -122.332165),  // 800 Occidental Ave S, Seattle, WA 98134
             new Location(47.617025, -122.191285),  // 11111 NE 8th St, Bellevue, WA 98004
             new Location(47.583582, -122.130622),  // 3003 160th Ave SE Bellevue, WA 98008
@@ -105,10 +105,10 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
             new Location(47.636121, -122.130254) //3009 157th Pl NE, Redmond, WA 98052
         };
 
-        private static List<string> _possibleBuildingTags = new List<string>
+        private static List<string> _possibleRepresentativeTags = new List<string>
         {
-            "Building 40",
-            "Building 43"
+            "Representative 40",
+            "Representative 43"
         };
 
         private static List<string> _possibleFloorTags = new List<string>
@@ -187,6 +187,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
         {
             device.Telemetry.Add(new Telemetry("Temperature", "Temperature", "double"));
             device.Telemetry.Add(new Telemetry("Humidity", "Humidity", "double"));
+            device.Telemetry.Add(new Telemetry("Weight", "Weight", "double"));
         }
 
         private static void AssignCommands(DeviceModel device)
@@ -258,7 +259,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
                 device.Twin = new Twin();
             }
 
-            device.Twin.Tags["Building"] = Random(_possibleBuildingTags);
+            device.Twin.Tags["Representative"] = Random(_possibleRepresentativeTags);
             device.Twin.Tags["Floor"] = Random(_possibleFloorTags);
         }
 
@@ -271,7 +272,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
                     device.Twin = new Twin();
                 }
 
-                device.Twin.Properties.Desired.Set("Config.TemperatureMeanValue", 70);
+                device.Twin.Properties.Desired.Set("Config.TemperatureMeanValue", 10);
             }
         }
 
