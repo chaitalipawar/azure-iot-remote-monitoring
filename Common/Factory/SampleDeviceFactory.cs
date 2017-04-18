@@ -48,8 +48,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Factory
             "SmartCooler021",
             "SmartCooler022",
             "SmartCooler023",
-            "SmartCooler024",
-            "SmartCooler025"
+            "SmartCooler024"
         };
 
         private static readonly List<string> FreeFirmwareDeviceNames = new List<string>
